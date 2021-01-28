@@ -41,10 +41,38 @@ class Airplane {
           + It should return a string with `name` and `age`. Example: "Mary, 50"
   */
   
- class Person {
-    
+  class Person {
+    constructor(name, age) {
+      this.name = name;
+      this.age = age;
+      this.stomach = [];
+    }
+    eat(someFood) {
+      if (this.stomach.length < 10) {
+        this.stomach.push(someFood);
+      }
+    }
+    poop() {
+      this.stomach = [];
+    }
+    toString() {
+      return `${this.name}, ${this.age}`;
+    }
   }
+
+  // Test output: Person constructor and functions
+  const mary = new Person("Mary", 50);
+  console.log(mary);
+  mary.eat("oatmeal");
+  mary.eat("fruit");
+  mary.eat("sandwich");
+  console.log(mary);
+  mary.poop();
+  console.log(mary);
+  console.log(mary.toString());
   
+
+
   /*
     TASK 2
       - Write a Car class whose constructor initializes `model` and `milesPerGallon` from arguments.
@@ -59,10 +87,38 @@ class Airplane {
           + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
   */
   
- class Car {
-    
+  class Car {
+    constructor(model, milesPerGallon) {
+      this.model = model;
+      this.milesPerGallon = milesPerGallon;
+      this.tank = 0;
+      this.odometer = 0;
+    }
+    fill(gallons) {
+      this.tank += gallons;
+    }
+    drive(distance) {
+      let gasUsed = (1 / this.milesPerGallon * distance);
+      if (gasUsed >= this.tank) {
+        distance = this.tank * this.milesPerGallon;
+        gasUsed = (1 / this.milesPerGallon * distance);
+      }
+      this.odometer += distance;
+      this.tank -= gasUsed;
+      return this.tank === 0 ? `I ran out of fuel at ${this.odometer} miles!` : undefined;
+    }
   }
+
+  // Test output: Car constructor and functions
+  const hondaCRV = new Car("CR-V", 40);
+  console.log(hondaCRV);
+  hondaCRV.fill(1);
+  console.log(hondaCRV);
+  console.log(hondaCRV.drive(5));
+  console.log(hondaCRV.drive(40));
   
+
+
   /*
     TASK 3
       - Write a Lambdasian class.
